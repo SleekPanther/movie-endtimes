@@ -42,20 +42,20 @@ let getSmallestDiff = (showtimes1, endTimes1, showtimes2, endTimes2) =>{
 	let gap1to2 = []
 	let gap2to1 = []
 	for(let i=0; i< endTimes1.length; i++){
-        // console.log(`showtimes2 ${stringToDate(showtimes2[i+2])} end ${endTimes1[i]}`)	//offset by 2 since showtimes has runtime & want NEXT showtime
+		// console.log(`showtimes2 ${stringToDate(showtimes2[i+2])} end ${endTimes1[i]}`)	//offset by 2 since showtimes has runtime & want NEXT showtime
 		// console.log( Math.floor((stringToDate(showtimes2[i+2]) - endTimes1[i] )/1000 )/60 )
 		gap1to2.push(Math.floor((stringToDate(showtimes2[i+2]) - endTimes1[i] )/1000 )/60)		//1000 for ms to seconds, then 60 for seconds to minutes
 		gap2to1.push(Math.floor((stringToDate(showtimes1[i+2]) - endTimes2[i] )/1000 )/60)
 	}
-    let min1To2 = Math.min(...gap1to2.filter(x => !isNaN(x)));
-    let min2To1 = Math.min(...gap2to1.filter(x => !isNaN(x)));
+	let min1To2 = Math.min(...gap1to2.filter(x => !isNaN(x)));
+	let min2To1 = Math.min(...gap2to1.filter(x => !isNaN(x)));
 	console.log(gap1to2, `Min = ${min1To2}`);
 	console.log(gap2to1, `Min = ${min2To1}`);
-    if(min1To2 <= min2To1){
-        console.log(`See movie 1 first, smallest gap ${min1To2}`)
-    }
-    else{
-        console.log(`See movie 2 first, smallest gap ${min2To1}`)
-    }	
+	if(min1To2 <= min2To1){
+		console.log(`See movie 1 first, smallest gap ${min1To2}`)
+	}
+	else{
+		console.log(`See movie 2 first, smallest gap ${min2To1}`)
+	}
 }
 getSmallestDiff(showtimes1, endTimes1, showtimes2, endTimes2)
