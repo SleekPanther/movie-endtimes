@@ -31,8 +31,8 @@ let getMovieEndTimes = (showtimes) =>{
 	return endTimes;
 }
 
-let showtimes1 = [2.59, '12:00',   '3:40',   '7:25']
-let showtimes2 = [1.32, '12:50',  '3:25',  '6:35',  '8:55']
+let showtimes1 = [2.21, '12:00',  '3:00',  '6:00',  '8:25'].map((s, i) => i > 0 ? s.trim() : s)  //fast x
+let showtimes2 = [2.02, '12:00', '3:00',  '5:50', '8:25'].map((s, i) => i > 0 ? s.trim() : s)  //fake 12
 let endTimes1 = getMovieEndTimes(showtimes1)
 let endTimes2 = getMovieEndTimes(showtimes2)
 console.log('End times 1:', endTimes1)
