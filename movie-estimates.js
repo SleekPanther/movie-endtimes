@@ -24,7 +24,7 @@ let getMovieEndTimes = (showtimes) =>{
 	let durationInMinutes = getDurationInMinutes(showtimes[0]);
 	let endTimes = []
 	for(let i=1; i< showtimes.length; i++){		//skip 0
-		let startTime = stringToDate(showtimes[i]);
+		let startTime = to24HourTime(showtimes[i]);
 		startTime.setMinutes(startTime.getMinutes() + durationInMinutes);	//mutate
 		endTimes.push(startTime)
 	}
