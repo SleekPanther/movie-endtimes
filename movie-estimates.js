@@ -10,10 +10,10 @@ let getDurationInMinutes = (runtime) => {
 	return minutes;
 }
 
-let stringToDate = (str) => new Date(`January 1 2023 ${str}`)	//date part doesn't matter
+let stringToDate = (str) => str instanceof Date ? str : new Date(`January 1 2023 ${str}`)	//date part doesn't matter
 
 const to24HourTime = (str) => {
-	let date = stringToDate(str);
+	let date = typeof(str) === 'string' ? stringToDate(str) : str;
 	if(date.getHours() < 12){
 		date.setHours(date.getHours() +12)
 	}
