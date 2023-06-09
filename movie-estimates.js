@@ -4,7 +4,7 @@ let getDurationInMinutes = (runtime) => {
 		return 60* parts[0] + Number(parts[1]);	//assume we always have hour:minutes & no more
 	}
 	else if(runtime % 1 === 0){		//check if it doesn't contain a decimal
-		return runtime;
+		return 60 * runtime;
 	}
 	let minutes = 60 * Math.floor(runtime) + (runtime - Math.floor(runtime)) * 100;	//simple time conversion hack. Assume 1.22 means 1 hr & 22 mins
 	return minutes;
