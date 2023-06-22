@@ -3,8 +3,11 @@ let getDurationInMinutes = (runtime) => {
 		let parts = runtime.split(":");
 		return 60* parts[0] + Number(parts[1]);	//assume we always have hour:minutes & no more
 	}
-	else if(runtime % 1 === 0){		//check if it doesn't contain a decimal
+	else if(runtime < 10 && runtime % 1 === 0){		//check if it doesn't contain a decimal, whole number hours
 		return 60 * runtime;
+	}
+	else if(runtime % 1 === 0){		//already in minutes
+		return runtime;
 	}
 	let minutes = 60 * Math.floor(runtime) + (runtime - Math.floor(runtime)) * 100;	//simple time conversion hack. Assume 1.22 means 1 hr & 22 mins
 	return minutes;
@@ -32,7 +35,8 @@ let getMovieEndTimes = (showtimes) =>{
 }
 
 let showtimes1 = [2.21, '12:00',  '3:00',  '6:00',  '8:25'].map((s, i) => i > 0 ? s.trim() : s)  //fast x
-let showtimes2 = [2.02, '12:00', '3:00',  '5:50', '8:25'].map((s, i) => i > 0 ? s.trim() : s)  //fake 12
+let showtimes1 = [144, '4:45', '8:30'].map((s, i) => i > 0 ? s.trim() : s)  //todo handle floats with .00
+let showtimes2 = [109, '3:45', '6:30'].map((s, i) => i > 0 ? s.trim() : s)  //elemental
 let endTimes1 = getMovieEndTimes(showtimes1)
 let endTimes2 = getMovieEndTimes(showtimes2)
 console.log('End times 1:', endTimes1)
