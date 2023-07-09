@@ -24,6 +24,7 @@ const to24HourTime = (str) => {
 }
 
 let getMovieEndTimes = (showtimes) =>{
+	showtimes = showtimes.map((s, i) => i > 0 ? s.trim() : s)
 	let durationInMinutes = getDurationInMinutes(showtimes[0]);
 	let endTimes = []
 	for(let i=1; i< showtimes.length; i++){		//skip 0
@@ -34,9 +35,8 @@ let getMovieEndTimes = (showtimes) =>{
 	return endTimes;
 }
 
-let showtimes1 = [2.21, '12:00',  '3:00',  '6:00',  '8:25'].map((s, i) => i > 0 ? s.trim() : s)  //fast x
-let showtimes1 = [144, '4:45', '8:30'].map((s, i) => i > 0 ? s.trim() : s)  //todo handle floats with .00
-let showtimes2 = [109, '3:45', '6:30'].map((s, i) => i > 0 ? s.trim() : s)  //elemental
+let showtimes1 = [144, '4:45', '8:30']
+let showtimes2 = [109, '3:45', '6:30']
 let endTimes1 = getMovieEndTimes(showtimes1)
 let endTimes2 = getMovieEndTimes(showtimes2)
 console.log('End times 1:', endTimes1)
