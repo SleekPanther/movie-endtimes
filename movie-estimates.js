@@ -23,11 +23,26 @@ const to24HourTime = (str) => {
 	return date;
 }
 
-let getMovieEndTimes = (showtimes) =>{
+const sanitizeInput = (showtimes) => {
 	showtimes = showtimes.map((s, i) => i > 0 ? s.trim() : s)
+	for(let i=1; i<showtimes.length; i++){    //skip duration
+		let time = showtimes[i].split(/\s+/);
+		if(time.length>1){
+			showtimes = [
+			    ...showtimes.slice(0, i),
+			    ...time,
+			    ...showtimes.slice(i +1)
+			];
+			i += time.length - 1;
+		}
+	}
+	return showtimes;
+}
+
+let getMovieEndTimes = (showtimes) =>{
 	let durationInMinutes = getDurationInMinutes(showtimes[0]);
 	let endTimes = []
-	for(let i=1; i< showtimes.length; i++){		//skip 0
+	for(let i = 1; i < showtimes.length; i++){		//skip 0
 		let startTime = to24HourTime(showtimes[i]);
 		startTime.setMinutes(startTime.getMinutes() + durationInMinutes);	//mutate
 		endTimes.push(startTime)
@@ -35,8 +50,8 @@ let getMovieEndTimes = (showtimes) =>{
 	return endTimes;
 }
 
-let showtimes1 = [144, '4:45', '8:30']
-let showtimes2 = [109, '3:45', '6:30']
+let showtimes1 = sanitizeInput([163,'12:45  4:30'])
+let showtimes2 = sanitizeInput([180, '12:15  4:10'])
 let endTimes1 = getMovieEndTimes(showtimes1)
 let endTimes2 = getMovieEndTimes(showtimes2)
 console.log('End times 1:', endTimes1)
