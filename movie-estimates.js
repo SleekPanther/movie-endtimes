@@ -36,10 +36,9 @@ const to24HourTime = str => {
 }
 
 const sanitizeInput = (showtimes) => {
-	showtimes = showtimes.trim()
 	let newShowtimes = [showtimes[0], showtimes[1]];    //first copy duration & title = showtimes.map((s, i) => i > 0 ? s.trim() : s)
 	for (let i = 2; i < showtimes.length; i++) {    //skip duration & title
-		let times = showtimes[i].split(/\s+/);   //split on whitespace which trims & removed empty entries
+		let times = showtimes[i].trim().split(/\s+/);   //split on whitespace which trims & removed empty entries
 		for (let time of times) {
 			newShowtimes.push(time)
 		}
